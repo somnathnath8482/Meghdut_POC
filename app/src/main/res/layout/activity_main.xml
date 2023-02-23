@@ -7,31 +7,5 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/print"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Print text"
-        android:layout_centerInParent="true"
-        />
-
-    <Button
-        android:id="@+id/connect"
-        android:layout_below="@id/print"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect Printer"
-        android:layout_centerInParent="true"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>
