@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".MainActivity">
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="print kot"
+    android:layout_centerInParent="true"
+    android:padding="@dimen/_10sdp"
+    android:id="@+id/kot"/>
 
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="print bill"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_below="@id/kot"
+    android:padding="@dimen/_10sdp"
+    android:id="@+id/BILL"/>
+
+ <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="print INVOICE"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_below="@id/BILL"
+    android:padding="@dimen/_10sdp"
+    android:id="@+id/INVOICE"/>
 
 </RelativeLayout>

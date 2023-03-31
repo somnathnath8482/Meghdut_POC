@@ -28,32 +28,60 @@ public class Methodclass {
             return;
 
 
-        CustomProgressbar.showProgressBar(activity, false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+               activity.runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       CustomProgressbar.showProgressBar(activity, false);
+                   }
+               });
 
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-       Call<String>call =  apiInterface.PostReqForm(url, "",map);
-       call.enqueue(new Callback<String>() {
-           @Override
-           public void onResponse(Call<String> call, Response<String> response) {
-               CustomProgressbar.hideProgressBar();
-               if (response.isSuccessful() && response.code()==200){
-                if (allInterface!=null){
-                    allInterface.OnSuccess(200, response.body());
-                }
-               }else{
-                   allInterface.OnSuccess(response.code(), response.message());
-               }
+                Call<String>call =  apiInterface.PostReqForm(url, "",map);
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        CustomProgressbar.hideProgressBar();
+                        if (response.isSuccessful() && response.code()==200){
+                            if (allInterface!=null){
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        allInterface.OnSuccess(200, response.body());
+                                    }
+                                });
 
-           }
+                            }
+                        }else{
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    allInterface.OnSuccess(response.code(), response.message());
+                                }
+                            });
 
-           @Override
-           public void onFailure(Call<String> call, Throwable t) {
-               CustomProgressbar.hideProgressBar();
-               Log.e("TAG", "onFailure: "+t.getMessage() );
-           }
-       });
+                        }
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                CustomProgressbar.hideProgressBar();
+                                Log.e("TAG", "onFailure: "+t.getMessage() );
+                            }
+                        });
+
+                    }
+                });
+
+            }
+        }).start();
 
     }
 
